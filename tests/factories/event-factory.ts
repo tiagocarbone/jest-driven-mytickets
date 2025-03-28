@@ -11,7 +11,6 @@ export async function createNewEventFactory(){
     return event;
 }
 
-
 export async function createNewEventFactoryWithDateInThePast(){
     const event = {
         name: faker.person.fullName(),
@@ -36,3 +35,15 @@ export async function createNewEventFactoryWithoutName(){
      
     return event;
 }
+
+
+export async function createNewEventOnDb(){
+    const event = {
+        name: faker.person.fullName(),
+        date: faker.date.future().toISOString()
+    }
+     
+    const userReturned = await prisma.event.create({ data: event });
+    return userReturned;
+}
+
